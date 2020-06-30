@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+</head>
+<body>
+
+
+<!--header area start-->
+<header >
+
+<div class="container">
+
+  <div class="row">
+
+  <div class="  col-md-1" >
+    <p class="logo"> Logo ITNS</p>
+  </div>
+    <div class="col-md-8" >
+      <h3 class="mid"> Portail développement</h3>
+    </div>
+
+  <div class=" col-md-1">
+    <a href="#"><i class="fa fa-bell"></i> <span > </span></a>
+  </div>
+    <div class=" col-md-1">
+    <a href="#"><i class="fa fa-user-circle" aria-hidden="true"></i><span > LSE </span></a>
+  </div>
+    <div class=" col-md-1">
+      <a href="#"><i class="fa fa-power-off"></i><span >  </span></a>
+    </div>
+</div>
+</div>
+</header>
+
+<!--header area end-->
+<!--sidebar start-->
+<div class="sidebar">
+
+  <a href="#"><i class="fa fa-bar-chart"></i><span>Dashboard</span></a>
+  <a href="#"><i class="fa fa-list-ul"></i><span>Taches et Docusments</span></a>
+  <a href="#"><i class="fa fa-file-text-o"></i><span>Documents</span></a>
+  <a href="#"><i class="fa fa-database"></i><span>Gestion des projets</span></a>
+  <a href="#"><i class="fa fa-desktop"></i><span>Plate-forme développement </span></a>
+  <a href="#"><i class="fa fa-calendar"></i><span>Settings</span></a>
+
+</div>
+<!--sidebar end-->
+
+<div class="content">
+
+  <div class="container">
+
+    <div class="col-md-11 , text-center">
+      <br>
+
+      <div *ngIf="taches">
+
+        <div class="row">
+
+          <br>
+          <div class="btn-group mr-3 , col-md-1">
+            <br>
+            <button type="button" class="btn btn-outline-success" (click)="getTaches()"> <i class="fa fa-refresh" aria-hidden="true"></i></button>
+
+          </div>
+          <div class="col-md-4">
+            <br>
+
+        <select [(ngModel)]="selectedValue"  (ngModelChange)="getTachesByClient($event)">
+          <option  value="-1" selected> Selectionner un Client  </option>
+          <option *ngFor="let t of alllist" [ngValue]= "t.client"> {{t.client}} </option>
+
+
+        </select>
+        </div>
+          <br>
+        <div class="col-md-4">
+          <select  [(ngModel)]="selectedValue"  (ngModelChange)="getTachesByProject($event)">
+            <option  value="-1" selected> Selectionner un Projet  </option>
+            <option *ngFor="let t of alllist" [ngValue]= "t.projet"> {{t.projet}} </option>
+
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <select  [(ngModel)]="selectedValue"  (ngModelChange)="getTachesByActivity($event)">
+            <option  value="-1" selected> Selectionner une Activité  </option>
+            <option *ngFor="let t of alllist" [ngValue]= "t.activite"> {{t.activite}} </option>
+
+          </select>
+        </div>
+
+        </div>
+        <br>
+      <table class="table table-striped" *ngIf="alllist">
+
+        <thead>
+        <tr clas>
+
+          <th scope="col">Réference tâche</th>
+          <th scope="col">Client</th>
+          <th scope="col">Projet</th>
+          <th scope="col"><i class="fa fa-bell" aria-hidden="true"></i>      Echéance</th>
+          <th scope="col">Charge Hj</th>
+          <th scope="col">Date Démarrage</th>
+          <th scope="col">Activité</th>
+          <th scope="col">Téchnologie</th>
+          <th scope="col">Dernière modification</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let t of taches">
+
+          <td>{{t.reference}}</td>
+          <td>{{t.projet}}</td>
+          <td>{{t.client}}</td>
+          <td>{{t.echeance}}</td>
+          <td>{{t.charge}}</td>
+          <td>{{t.demarrage}}</td>
+          <td>{{t.activite}}</td>
+          <td>{{t.tech}}</td>
+          <td>{{t.drmodif}}</td>
+
+
+        </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <div>
+
+    </div>
+    <div class ="row">
+
+      <router-outlet>
+        <div class="col-md-6">
+          <app-charts></app-charts>
+        </div>
+        <div class="col-md-6">
+          <app-chart2></app-chart2>
+        </div>
+
+
+      </router-outlet>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
+
